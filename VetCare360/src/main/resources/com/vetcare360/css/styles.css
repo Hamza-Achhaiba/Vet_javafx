@@ -1,0 +1,157 @@
+/* VetCare360 Main Stylesheet */
+
+/* Color Variables */
+* {
+    -fx-primary: #3498db;
+    -fx-primary-dark: #2980b9;
+    -fx-secondary: #2ecc71;
+    -fx-secondary-dark: #27ae60;
+    -fx-light-grey: #f4f4f4;
+    -fx-mid-grey: #e0e0e0;
+    -fx-dark-grey: #555555;
+    -fx-warning: #e74c3c;
+}
+
+/* Base Styles */
+.root {
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-background-color: white;
+}
+
+/* Header Styles */
+.header-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-dark;
+    -fx-padding: 0 0 10 0;
+}
+
+.sub-header {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-dark-grey;
+}
+
+/* Form Styles */
+.form-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-dark-grey;
+}
+
+.text-field, .text-area, .date-picker, .combo-box {
+    -fx-background-color: white;
+    -fx-border-color: -fx-mid-grey;
+    -fx-border-radius: 3px;
+    -fx-padding: 5px;
+}
+
+.text-field:focused, .text-area:focused, .date-picker:focused, .combo-box:focused {
+    -fx-border-color: -fx-primary;
+    -fx-effect: dropshadow(gaussian, rgba(52, 152, 219, 0.3), 5, 0, 0, 0);
+}
+
+/* Button Styles */
+.button {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 15 8 15;
+    -fx-background-radius: 3px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: -fx-primary-dark;
+}
+
+.button-secondary {
+    -fx-background-color: -fx-secondary;
+}
+
+.button-secondary:hover {
+    -fx-background-color: -fx-secondary-dark;
+}
+
+.button-cancel {
+    -fx-background-color: -fx-light-grey;
+    -fx-text-fill: -fx-dark-grey;
+}
+
+.button-cancel:hover {
+    -fx-background-color: -fx-mid-grey;
+}
+
+.button-danger {
+    -fx-background-color: -fx-warning;
+}
+
+.button-danger:hover {
+    -fx-background-color: derive(-fx-warning, -10%);
+}
+
+/* Table Styles */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: -fx-mid-grey;
+    -fx-border-radius: 3px;
+}
+
+.table-view .column-header {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-padding: 8px;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: -fx-light-grey;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: derive(-fx-primary, 70%);
+}
+
+/* Menu Styles */
+.menu-bar {
+    -fx-background-color: -fx-primary-dark;
+}
+
+.menu {
+    -fx-padding: 5 10 5 10;
+}
+
+.menu .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.menu-item .label {
+    -fx-text-fill: -fx-dark-grey;
+    -fx-font-weight: normal;
+}
+
+.menu-item:focused {
+    -fx-background-color: -fx-primary;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: white;
+}
+
+/* Status Messages */
+.status-error {
+    -fx-text-fill: -fx-warning;
+    -fx-font-weight: bold;
+}
+
+/* Container Styling */
+.content-pane {
+    -fx-background-color: white;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 2);
+    -fx-padding: 20px;
+}

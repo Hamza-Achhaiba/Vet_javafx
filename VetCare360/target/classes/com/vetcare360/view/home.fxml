@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.vetcare360.controller.HomeController"
+      spacing="30.0" alignment="CENTER">
+    <padding>
+        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+    </padding>
+    
+    <Label text="Welcome to VetCare360" styleClass="header-label" style="-fx-font-size: 32px;"/>
+    
+    <Label text="Your Complete Veterinary Management System" 
+           textAlignment="CENTER" 
+           styleClass="sub-header"/>
+           
+    <GridPane hgap="20.0" vgap="20.0" alignment="CENTER">
+        <VBox styleClass="card" GridPane.rowIndex="0" GridPane.columnIndex="0">
+            <padding>
+                <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+            </padding>
+            <Label text="Manage Owners" styleClass="sub-header"/>
+            <Label text="Add, edit, and manage pet owners" wrapText="true"/>
+            <VBox VBox.vgrow="ALWAYS" minHeight="20.0"/>
+            <Button text="Find Owners" onAction="#showOwnerSearch" prefWidth="180.0"/>
+        </VBox>
+        <VBox styleClass="card" GridPane.rowIndex="0" GridPane.columnIndex="1">
+            <padding>
+                <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+            </padding>
+            <Label text="Veterinarians" styleClass="sub-header"/>
+            <Label text="Manage veterinarians and their specializations" wrapText="true"/>
+            <VBox VBox.vgrow="ALWAYS" minHeight="20.0"/>
+            <Button text="Veterinarians" onAction="#showVets" prefWidth="180.0" styleClass="button-secondary"/>
+        </VBox>
+    </GridPane>
+</VBox>

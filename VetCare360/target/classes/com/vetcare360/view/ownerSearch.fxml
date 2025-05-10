@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:id="rootVBox"
+      fx:controller="com.vetcare360.controller.OwnerSearchController"
+      spacing="10.0" alignment="TOP_CENTER" prefWidth="900.0" prefHeight="600.0">
+    
+    <Label text="Find Owners" styleClass="header-label"/>
+    
+    <VBox styleClass="card">
+        <padding>
+            <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+        </padding>
+        
+        <Label text="Search by Last Name" styleClass="sub-header"/>
+        <Label text="Enter a last name to search for or leave blank to find all owners" 
+               wrapText="true" style="-fx-text-fill: -fx-dark-gray;"/>
+        
+        <HBox spacing="15.0" alignment="CENTER_LEFT" style="-fx-padding: 15 0;">
+            <TextField fx:id="lastNameField" promptText="Last name" HBox.hgrow="ALWAYS"/>
+            <Button text="Search" onAction="#searchOwners"/>
+        </HBox>
+        
+        <Button text="Add New Owner" onAction="#showAddOwner" styleClass="button-secondary"/>
+    </VBox>
+    
+    <VBox styleClass="card" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+        </padding>
+        
+        <Label text="Search Results" styleClass="sub-header"/>
+        
+        <TableView fx:id="ownersTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="nameColumn" text="Name" prefWidth="200.0"/>
+                <TableColumn fx:id="addressColumn" text="Address" prefWidth="200.0"/>
+                <TableColumn fx:id="cityColumn" text="City" prefWidth="150.0"/>
+                <TableColumn fx:id="telephoneColumn" text="Telephone" prefWidth="150.0"/>
+                <TableColumn fx:id="petsColumn" text="Pets" prefWidth="80.0"/>
+            </columns>
+            <placeholder>
+                <Label text="No owners found. Try a different search or add a new owner."/>
+            </placeholder>
+        </TableView>
+    </VBox>
+    <Label fx:id="statusLabel" style="-fx-text-fill: -fx-secondary-dark; -fx-font-size: 13px;"/>
+</VBox>
