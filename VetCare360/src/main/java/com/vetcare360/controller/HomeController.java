@@ -2,101 +2,87 @@ package com.vetcare360.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.stage.Stage;
-
-import java.io.IOException;
+import javafx.scene.control.ButtonType;
 
 /**
- * Controller for the home view.
- * This controller handles the home page functionality.
+ * Contrôleur pour la vue d'accueil.
+ * Ce contrôleur gère la page d'accueil.
  */
 public class HomeController {
+
+    private MainController mainController;
 
     // No need for contentPane field as it's not defined in the FXML
 
     /**
-     * Initialize the controller.
-     * This method is automatically called after the FXML file has been loaded.
+     * Initialise le contrôleur.
+     * Cette méthode est appelée automatiquement après le chargement du fichier FXML.
      */
     @FXML
     private void initialize() {
-        // Initialization code if needed
+        // Code d'initialisation si nécessaire
     }
 
     /**
-     * Show the owner search view.
-     * This method is called when the "Find Owners" button is clicked.
-     * @param event the action event
+     * Injecte le MainController.
+     * @param mainController le contrôleur principal
+     */
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
+    /**
+     * Affiche la vue d'accueil.
+     * Appelée lors du clic sur le bouton "Accueil".
+     * @param event l'événement d'action
+     */
+    @FXML
+    private void showHome(ActionEvent event) {
+        if (mainController != null) {
+            mainController.showHome();
+        } else {
+            showError("Erreur de navigation", "MainController non défini. Veuillez redémarrer l'application.");
+        }
+    }
+
+    /**
+     * Affiche la recherche de propriétaires.
+     * Appelée lors du clic sur le bouton "Trouver des propriétaires".
+     * @param event l'événement d'action
      */
     @FXML
     private void showOwnerSearch(ActionEvent event) {
-        try {
-            System.out.println("[DEBUG] Navigating to Owner Search");
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/vetcare360/view/main.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            MainController controller = loader.getController();
-            if (controller == null) {
-                System.err.println("[ERROR] MainController not initialized in showOwnerSearch");
-                showError("Controller Error", "Could not initialize MainController.");
-                return;
-            }
-            controller.showOwnerSearch(event);
-        } catch (IOException e) {
-            e.printStackTrace();
-            showError("Navigation Error", "Could not navigate to the owner search view: " + e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-            showError("Unexpected Error", "An unexpected error occurred: " + e.getMessage());
+        if (mainController != null) {
+            mainController.showOwnerSearch(event);
+        } else {
+            showError("Erreur de navigation", "MainController non défini. Veuillez redémarrer l'application.");
         }
     }
 
     /**
-     * Show the veterinarians view.
-     * This method is called when the "Veterinarians" button is clicked.
-     * @param event the action event
+     * Affiche la vue des vétérinaires.
+     * Appelée lors du clic sur le bouton "Vétérinaires".
+     * @param event l'événement d'action
      */
     @FXML
     private void showVets(ActionEvent event) {
-        try {
-            System.out.println("[DEBUG] Navigating to Veterinarians");
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/vetcare360/view/main.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            MainController controller = loader.getController();
-            if (controller == null) {
-                System.err.println("[ERROR] MainController not initialized in showVets");
-                showError("Controller Error", "Could not initialize MainController.");
-                return;
-            }
-            controller.showVets(event);
-        } catch (IOException e) {
-            e.printStackTrace();
-            showError("Navigation Error", "Could not navigate to the veterinarians view: " + e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-            showError("Unexpected Error", "An unexpected error occurred: " + e.getMessage());
+        if (mainController != null) {
+            mainController.showVets(event);
+        } else {
+            showError("Erreur de navigation", "MainController non défini. Veuillez redémarrer l'application.");
         }
     }
 
     /**
-     * Show an error dialog.
-     * @param title the dialog title
-     * @param message the error message
+     * Affiche une boîte de dialogue d'erreur.
+     * @param title le titre de la boîte de dialogue
+     * @param message le message d'erreur
      */
     private void showError(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
         alert.setTitle(title);
-        alert.setHeaderText("An error occurred");
-        alert.setContentText(message);
+        alert.setHeaderText("Une erreur est survenue");
         alert.showAndWait();
     }
 }

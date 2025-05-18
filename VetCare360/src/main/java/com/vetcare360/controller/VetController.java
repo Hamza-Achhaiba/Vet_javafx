@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
 
 import java.time.LocalDate;
@@ -142,48 +141,47 @@ public class VetController {
     }
     
     /**
-     * Save or update a veterinarian.
-     * @param event the action event
+     * Sauvegarder ou mettre à jour un vétérinaire.
+     * @param event l'événement d'action
      */
     @FXML
     private void saveVet(ActionEvent event) {
-        // Get the form values
+        // Récupérer les valeurs du formulaire
         String firstName = firstNameField.getText().trim();
         String lastName = lastNameField.getText().trim();
         String specialization = specializationField.getText().trim();
-        
-        // Create or update the vet
+
+        // Créer ou mettre à jour le vétérinaire
         Vet vet = currentVet != null ? currentVet : new Vet();
         vet.setFirstName(firstName);
         vet.setLastName(lastName);
         vet.setSpecialization(specialization);
-        
-        // Validate the vet
+
+        // Valider le vétérinaire
         if (!vetService.validateVet(vet)) {
-            errorLabel.setText("Please fill in all required fields.");
+            errorLabel.setText("Veuillez remplir tous les champs obligatoires.");
             return;
         }
-        
-        // Save the vet
+
+        // Sauvegarder le vétérinaire
         vetService.saveVet(vet);
-        
-        // Always reload the list of vets from storage
+
+        // Recharger la liste des vétérinaires depuis la base
         List<Vet> updatedVets = vetService.getAllVets();
         vetsTable.setItems(FXCollections.observableArrayList(updatedVets));
-        
-        // Select the updated/added vet in the table
+
+        // Sélectionner le vétérinaire mis à jour/ajouté dans le tableau
         for (Vet v : updatedVets) {
-            if (v.getFirstName().equals(vet.getFirstName()) && v.getLastName().equals(vet.getLastName()) && v.getSpecialization().equals(vet.getSpecialization())) {
+            // Utiliser l'ID si possible, sinon fallback sur les champs
+            if ((vet.getId() != 0 && v.getId() == vet.getId()) ||
+                (v.getFirstName().equals(vet.getFirstName()) && v.getLastName().equals(vet.getLastName()) && v.getSpecialization().equals(vet.getSpecialization()))) {
                 vetsTable.getSelectionModel().select(v);
                 showVetDetails(v);
                 break;
             }
         }
-        
-        // Show success message
-        errorLabel.setText("Veterinarian saved successfully.");
-        // Set button text
-        saveButton.setText(currentVet == null ? "Add" : "Update");
+        // Rafraîchir la table pour affichage instantané
+        vetsTable.refresh();
     }
     
     /**

@@ -13,7 +13,8 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:id="rootVBox"
       fx:controller="com.vetcare360.controller.OwnerController"
-      spacing="20.0" alignment="TOP_CENTER" prefWidth="900.0" prefHeight="700.0">
+      spacing="20.0" alignment="TOP_CENTER" prefWidth="900.0" prefHeight="700.0"
+      stylesheets="@../css/modern-styles.css">
     <padding>
         <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
     </padding>

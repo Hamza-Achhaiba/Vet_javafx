@@ -10,7 +10,8 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.vetcare360.controller.HomeController"
-      spacing="30.0" alignment="CENTER">
+      spacing="30.0" alignment="CENTER"
+      stylesheets="@../css/modern-styles.css">
     <padding>
         <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
     </padding>

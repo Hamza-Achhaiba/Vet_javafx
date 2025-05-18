@@ -12,75 +12,75 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * Main application class for VetCare360.
+ * Classe principale de l'application VetCare360.
  */
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) {
+    public void start(@SuppressWarnings("exports") Stage stage) {
         try {
-            // Get the resource URL
+            // Récupérer l'URL de la ressource
             URL mainFxmlUrl = Main.class.getResource("/com/vetcare360/view/main.fxml");
             if (mainFxmlUrl == null) {
-                showError("Resource Error", "Could not find the main.fxml file. The application cannot start.");
+                showError("Erreur de ressource", "Impossible de trouver le fichier main.fxml. L'application ne peut pas démarrer.");
                 Platform.exit();
                 return;
             }
 
             FXMLLoader fxmlLoader = new FXMLLoader(mainFxmlUrl);
 
-            // Load the FXML
+            // Charger le FXML
             Scene scene;
             try {
                 scene = new Scene(fxmlLoader.load(), 800, 600);
             } catch (IOException e) {
-                showError("Loading Error", "Could not load the main view: " + e.getMessage());
+                showError("Erreur de chargement", "Impossible de charger la vue principale : " + e.getMessage());
                 e.printStackTrace();
                 Platform.exit();
                 return;
             }
 
-            // Add stylesheet
+            // Ajouter la feuille de style
             try {
                 URL cssUrl = getClass().getResource("/com/vetcare360/css/styles.css");
                 if (cssUrl != null) {
                     scene.getStylesheets().add(cssUrl.toExternalForm());
                 } else {
-                    System.err.println("Warning: Could not find the CSS file. The application will continue without styling.");
+                    System.err.println("Attention : Impossible de trouver le fichier CSS. L'application continuera sans style.");
                 }
             } catch (Exception e) {
-                System.err.println("Error loading CSS: " + e.getMessage());
+                System.err.println("Erreur lors du chargement du CSS : " + e.getMessage());
                 e.printStackTrace();
-                // Continue without styling
+                // Continuer sans style
             }
 
-            // Set up and show the stage
-            stage.setTitle("VetCare360 - Veterinary Management System");
+            // Configurer et afficher la fenêtre principale
+            stage.setTitle("VetCare360 - Système de gestion vétérinaire");
             stage.setScene(scene);
             stage.show();
 
         } catch (Exception e) {
-            showError("Startup Error", "An unexpected error occurred while starting the application: " + e.getMessage());
+            showError("Erreur au démarrage", "Une erreur inattendue est survenue lors du démarrage de l'application : " + e.getMessage());
             e.printStackTrace();
             Platform.exit();
         }
     }
 
     /**
-     * Show an error dialog.
-     * @param title the dialog title
-     * @param message the error message
+     * Affiche une boîte de dialogue d'erreur.
+     * @param title le titre de la boîte de dialogue
+     * @param message le message d'erreur
      */
     private void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
         alert.setTitle(title);
-        alert.setHeaderText("An error occurred");
+        alert.setHeaderText("Une erreur est survenue");
         alert.showAndWait();
     }
 
     /**
-     * Main method to launch the application.
-     * @param args command line arguments
+     * Méthode principale pour lancer l'application.
+     * @param args arguments de la ligne de commande
      */
     public static void main(String[] args) {
         launch();

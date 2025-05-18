@@ -97,6 +97,7 @@ public class OwnerController {
      * Set the owner to display.
      * @param owner the owner to display
      */
+    @SuppressWarnings("exports")
     public void setOwner(Owner owner) {
         this.currentOwner = owner;
 

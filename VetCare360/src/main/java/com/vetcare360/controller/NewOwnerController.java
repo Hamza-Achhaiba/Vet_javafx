@@ -59,6 +59,7 @@ public class NewOwnerController {
      * Set the owner to edit.
      * @param owner the owner to edit
      */
+    @SuppressWarnings("exports")
     public void setOwner(Owner owner) {
         try {
             if (owner == null) {

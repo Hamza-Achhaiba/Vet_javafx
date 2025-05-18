@@ -15,8 +15,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Controller for the new/edit visit view.
- * This controller handles adding and editing visits.
+ * Contrôleur pour la vue d'ajout de visite.
+ * Gère la logique pour ajouter une nouvelle visite.
  */
 public class VisitController {
 
@@ -47,33 +47,33 @@ public class VisitController {
     private Button deleteVisitButton;
 
     /**
-     * Initialize the controller.
-     * This method is automatically called after the FXML file has been loaded.
+     * Initialiser le contrôleur.
+     * Cette méthode est automatiquement appelée après le chargement du fichier FXML.
      */
     @FXML
     private void initialize() {
         try {
-            // Check if UI components are initialized
+            // Vérifier si les composants de l'interface utilisateur sont initialisés
             if (datePicker == null || descriptionArea == null || vetComboBox == null) {
-                System.err.println("Error: UI components not initialized properly");
+                System.err.println("Erreur : Composants de l'interface utilisateur non initialisés correctement");
                 return;
             }
 
-            // Set the date picker to today's date
+            // Définir le sélecteur de date à la date d'aujourd'hui
             datePicker.setValue(LocalDate.now());
 
-            // Load all vets into the combo box
+            // Charger tous les vétérinaires dans la combo box
             try {
                 List<Vet> vets = vetService.getAllVets();
                 vetComboBox.setItems(FXCollections.observableArrayList(vets));
             } catch (Exception e) {
-                System.err.println("Error loading vets: " + e.getMessage());
+                System.err.println("Erreur lors du chargement des vétérinaires : " + e.getMessage());
                 e.printStackTrace();
-                // Continue with an empty list rather than failing
+                // Continuer avec une liste vide plutôt que d'échouer
                 vetComboBox.setItems(FXCollections.observableArrayList());
             }
 
-            // Set the cell factory to display the vet's full name
+            // Définir la fabrique de cellules pour afficher le nom complet du vétérinaire
             vetComboBox.setCellFactory(param -> new ListCell<>() {
                 @Override
                 protected void updateItem(Vet item, boolean empty) {
@@ -86,7 +86,7 @@ public class VisitController {
                 }
             });
 
-            // Set the button cell to display the selected vet's full name
+            // Définir la cellule de bouton pour afficher le nom complet du vétérinaire sélectionné
             vetComboBox.setButtonCell(new ListCell<>() {
                 @Override
                 protected void updateItem(Vet item, boolean empty) {
@@ -99,205 +99,180 @@ public class VisitController {
                 }
             });
 
-            // Clear any previous error messages
+            // Effacer les messages d'erreur précédents
             if (errorLabel != null) {
                 errorLabel.setText("");
             }
         } catch (Exception e) {
-            System.err.println("Error initializing VisitController: " + e.getMessage());
+            System.err.println("Erreur lors de l'initialisation de VisitController : " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     /**
-     * Set the pet for a new visit.
-     * @param pet the pet
+     * Définir l'animal pour une nouvelle visite.
+     * @param pet l'animal
      */
+    @SuppressWarnings("exports")
     public void setPet(Pet pet) {
         try {
-            System.out.println("[DEBUG] setPet called with: " + (pet != null ? pet.getName() : "null"));
+            System.out.println("[DEBUG] setPet appelé avec : " + (pet != null ? pet.getName() : "null"));
             if (pet == null) {
-                System.err.println("[ERROR] Null pet passed to setPet");
+                System.err.println("[ERROR] Animal nul passé à setPet");
                 return;
             }
 
             this.currentPet = pet;
             this.currentVisit = new Visit();
 
-            // Debug UI elements
-            System.out.println("[DEBUG] UI elements in setPet:");
-            System.out.println("  petLabel: " + (petLabel != null ? "present" : "null"));
-            System.out.println("  datePicker: " + (datePicker != null ? "present" : "null"));
-            System.out.println("  vetComboBox: " + (vetComboBox != null ? "present" : "null"));
-            System.out.println("  descriptionArea: " + (descriptionArea != null ? "present" : "null"));
+            // Déboguer les éléments de l'interface utilisateur
+            System.out.println("[DEBUG] Éléments de l'interface utilisateur dans setPet :");
+            System.out.println("  petLabel : " + (petLabel != null ? "présent" : "null"));
+            System.out.println("  datePicker : " + (datePicker != null ? "présent" : "null"));
+            System.out.println("  vetComboBox : " + (vetComboBox != null ? "présent" : "null"));
+            System.out.println("  descriptionArea : " + (descriptionArea != null ? "présent" : "null"));
 
-            // Check if UI components exist before using them
+            // Vérifier si les composants de l'interface utilisateur existent avant de les utiliser
             if (petLabel != null) {
                 petLabel.setText(pet.getName() + " (" + pet.getType() + ")");
             } else {
-                System.err.println("[WARN] petLabel is null in setPet");
+                System.err.println("[WARN] petLabel est null dans setPet");
             }
         } catch (Exception e) {
-            System.err.println("[ERROR] Exception in setPet: " + e.getMessage());
+            System.err.println("[ERROR] Exception dans setPet : " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     /**
-     * Set the visit to edit.
-     * @param visit the visit to edit
+     * Définir la visite à éditer.
+     * @param visit la visite à éditer
      */
+    @SuppressWarnings("exports")
     public void setVisit(Visit visit) {
         try {
-            System.out.println("Setting visit for editing: " + (visit != null ? visit.getId() : "null"));
+            System.out.println("Définir la visite pour l'édition : " + (visit != null ? visit.getId() : "null"));
             if (visit == null) {
-                System.err.println("Error: Null visit passed to setVisit");
+                System.err.println("Erreur : Visite nulle passée à setVisit");
                 return;
             }
 
             this.currentVisit = visit;
             this.currentPet = visit.getPet();
 
-            // Check if UI components exist before using them
+            // Vérifier si les composants de l'interface utilisateur existent avant de les utiliser
             if (datePicker != null) {
                 datePicker.setValue(visit.getDate());
             } else {
-                System.err.println("Warning: datePicker is null in setVisit");
+                System.err.println("Avertissement : datePicker est null dans setVisit");
             }
 
             if (descriptionArea != null) {
                 descriptionArea.setText(visit.getDescription());
             } else {
-                System.err.println("Warning: descriptionArea is null in setVisit");
+                System.err.println("Avertissement : descriptionArea est null dans setVisit");
             }
 
             if (vetComboBox != null) {
                 vetComboBox.setValue(visit.getVet());
             } else {
-                System.err.println("Warning: vetComboBox is null in setVisit");
+                System.err.println("Avertissement : vetComboBox est null dans setVisit");
             }
 
-            // Update the pet label
+            // Mettre à jour l'étiquette de l'animal
             Pet pet = visit.getPet();
             if (pet != null && petLabel != null) {
                 petLabel.setText(pet.getName() + " (" + pet.getType() + ")");
             } else {
-                System.err.println("Warning: pet or petLabel is null in setVisit");
+                System.err.println("Avertissement : pet ou petLabel est null dans setVisit");
             }
         } catch (Exception e) {
-            System.err.println("Error in setVisit: " + e.getMessage());
+            System.err.println("Erreur dans setVisit : " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     /**
-     * Save the visit.
-     * @param event the action event
+     * Sauvegarder la visite.
+     * Vérifie que tous les champs sont remplis avant de sauvegarder.
+     * @param event l'événement d'action
      */
     @FXML
     private void saveVisit(ActionEvent event) {
         try {
-            System.out.println("[DEBUG] Attempting to save visit");
-            System.out.println("[DEBUG] currentVisit: " + (currentVisit != null ? currentVisit : "null"));
-            System.out.println("[DEBUG] currentPet: " + (currentPet != null ? currentPet : "null"));
-
-            // Check if UI components are initialized
+            // Vérifier si les composants de l'interface utilisateur sont initialisés
             if (datePicker == null || descriptionArea == null || vetComboBox == null) {
-                System.err.println("[ERROR] UI components not initialized properly");
-                showError("UI Error", "UI components not initialized properly");
+                showError("Erreur d'interface utilisateur", "Composants de l'interface utilisateur non initialisés correctement");
                 return;
             }
 
-            // Get the form values
+            // Obtenir les valeurs du formulaire
             LocalDate date = datePicker.getValue();
-            String description = descriptionArea.getText().trim();
+            String description = descriptionArea.getText() != null ? descriptionArea.getText().trim() : "";
             Vet vet = vetComboBox.getValue();
 
-            System.out.println("[DEBUG] Visit info: Date=" + date + ", Description=" + description + ", Vet=" + (vet != null ? vet.getFullName() : "null"));
-
-            // Basic validation
-            if (date == null || description.isEmpty() || vet == null) {
+            // Validation stricte des champs
+            if (date == null || vet == null || description.isEmpty()) {
                 if (errorLabel != null) {
-                    errorLabel.setText("Please fill in all required fields.");
+                    errorLabel.setText("Veuillez remplir tous les champs requis.");
                 }
-                System.err.println("[ERROR] Validation failed: missing fields");
-                showError("Validation Error", "Please fill in all required fields.");
+                showError("Erreur de validation", "Veuillez remplir tous les champs requis.");
                 return;
             }
 
-            // Update the visit
+            // Mettre à jour la visite
             currentVisit.setDate(date);
             currentVisit.setDescription(description);
             currentVisit.setVet(vet);
 
-            // Set the pet if this is a new visit
+            // Définir l'animal si c'est une nouvelle visite
             if (currentVisit.getPet() == null) {
                 if (currentPet == null) {
-                    System.err.println("[ERROR] No pet assigned to this visit");
-                    showError("Error", "No pet assigned to this visit");
+                    showError("Erreur", "Aucun animal assigné à cette visite");
                     return;
                 }
-                System.out.println("[DEBUG] Setting pet for visit");
                 currentVisit.setPet(currentPet);
                 currentPet.addVisit(currentVisit);
             }
 
-            // Validate the visit
-            if (!visitService.validateVisit(currentVisit)) {
-                if (errorLabel != null) {
-                    errorLabel.setText("Please fill in all required fields.");
-                }
-                System.err.println("[ERROR] Visit validation failed");
-                showError("Validation Error", "Please fill in all required fields.");
-                return;
-            }
-
-            // Save the visit
-            System.out.println("[DEBUG] Saving visit");
+            // Sauvegarder la visite
             visitService.saveVisit(currentVisit);
-            System.out.println("[DEBUG] Visit saved successfully with ID: " + currentVisit.getId());
-
-            // Set the flag
             visitSaved = true;
-
-            // Close the window
             closeWindow();
         } catch (Exception e) {
-            System.err.println("[ERROR] Exception saving visit: " + e.getMessage());
-            e.printStackTrace();
-            showError("Error", "Failed to save visit: " + e.getMessage());
+            showError("Erreur", "Échec de la sauvegarde de la visite : " + e.getMessage());
         }
     }
 
     /**
-     * Cancel the operation.
-     * @param event the action event
+     * Annuler l'opération.
+     * @param event l'événement d'action
      */
     @FXML
     private void cancel(ActionEvent event) {
         try {
             closeWindow();
         } catch (Exception e) {
-            System.err.println("Error in cancel: " + e.getMessage());
+            System.err.println("Erreur dans cancel : " + e.getMessage());
             e.printStackTrace();
-            showError("Error", "Failed to close window: " + e.getMessage());
+            showError("Erreur", "Échec de la fermeture de la fenêtre : " + e.getMessage());
         }
     }
 
     /**
-     * Check if the visit was saved.
-     * @return true if the visit was saved, false otherwise
+     * Vérifier si la visite a été sauvegardée.
+     * @return true si la visite a été sauvegardée, false sinon
      */
     public boolean isVisitSaved() {
         return visitSaved;
     }
 
     /**
-     * Close the current window.
+     * Fermer la fenêtre actuelle.
      */
     private void closeWindow() {
         try {
-            // Try to find a UI component to get the Stage
+            // Essayer de trouver un composant de l'interface utilisateur pour obtenir la Stage
             Control control = null;
             if (datePicker != null) control = datePicker;
             else if (descriptionArea != null) control = descriptionArea;
@@ -307,23 +282,23 @@ public class VisitController {
                 Stage stage = (Stage) control.getScene().getWindow();
                 stage.close();
             } else {
-                System.err.println("Cannot close window - no UI controls available");
+                System.err.println("Impossible de fermer la fenêtre - aucun contrôle de l'interface utilisateur disponible");
             }
         } catch (Exception e) {
-            System.err.println("Error closing window: " + e.getMessage());
+            System.err.println("Erreur lors de la fermeture de la fenêtre : " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     /**
-     * Show an error dialog.
-     * @param title the dialog title
-     * @param message the error message
+     * Afficher une boîte de dialogue d'erreur.
+     * @param title le titre de la boîte de dialogue
+     * @param message le message d'erreur
      */
     private void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
-        alert.setHeaderText("An error occurred");
+        alert.setHeaderText("Une erreur est survenue");
         alert.setContentText(message);
         alert.showAndWait();
     }
@@ -331,13 +306,13 @@ public class VisitController {
     @FXML
     private void deleteVisit(ActionEvent event) {
         if (currentVisit == null || currentVisit.getId() == 0) {
-            showError("Delete Visit", "No visit selected or visit not saved.");
+            showError("Supprimer la visite", "Aucune visite sélectionnée ou visite non sauvegardée.");
             return;
         }
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmAlert.setTitle("Delete Visit");
-        confirmAlert.setHeaderText("Delete Visit");
-        confirmAlert.setContentText("Are you sure you want to delete this visit?");
+        confirmAlert.setTitle("Supprimer la visite");
+        confirmAlert.setHeaderText("Supprimer la visite");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir supprimer cette visite ?");
         confirmAlert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 visitService.deleteVisit(currentVisit.getId());

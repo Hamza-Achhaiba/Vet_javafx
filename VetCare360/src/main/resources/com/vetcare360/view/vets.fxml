@@ -13,11 +13,12 @@
 <?import javafx.geometry.Insets?>
 
 <VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
+      xmlns:fx="http://javafx.com/fxml"
       fx:id="rootVBox"
-            fx:controller="com.vetcare360.controller.VetController"
-      spacing="20.0" alignment="TOP_CENTER" prefWidth="900.0" prefHeight="600.0">
-            <Label text="Veterinarians" styleClass="header-label"/>
+      fx:controller="com.vetcare360.controller.VetController"
+      spacing="20.0" alignment="TOP_CENTER" prefWidth="900.0" prefHeight="600.0"
+      stylesheets="@../css/modern-styles.css">
+    <Label text="Veterinarians" styleClass="header-label"/>
     <HBox spacing="20.0" alignment="TOP_CENTER">
         <!-- Left: Vets Table -->
         <VBox spacing="10.0" prefWidth="300.0">

@@ -137,7 +137,7 @@ public class DataStore {
                     String name = unescape(f[1]);
                     LocalDate birthDate = f[2].isEmpty() ? null : LocalDate.parse(f[2]);
                     String type = unescape(f[3]);
-                    int ownerId = f[4].isEmpty() ? 0 : Integer.parseInt(f[4]);
+                    // ownerId is not used here; owner will be linked after all loaded
                     Pet p = new Pet(id, name, birthDate, type, null);
                     pets.put(id, p);
                     nextPetId = Math.max(nextPetId, id + 1);
@@ -191,8 +191,8 @@ public class DataStore {
                     int id = Integer.parseInt(f[0]);
                     LocalDate date = f[1].isEmpty() ? null : LocalDate.parse(f[1]);
                     String description = unescape(f[2]);
-                    int petId = f[3].isEmpty() ? 0 : Integer.parseInt(f[3]);
-                    int vetId = f[4].isEmpty() ? 0 : Integer.parseInt(f[4]);
+                    // int petId = f[3].isEmpty() ? 0 : Integer.parseInt(f[3]);
+                    // int vetId = f[4].isEmpty() ? 0 : Integer.parseInt(f[4]);
                     Visit v = new Visit(id, date, description, null, null);
                     visits.put(id, v);
                     nextVisitId = Math.max(nextVisitId, id + 1);

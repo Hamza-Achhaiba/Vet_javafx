@@ -15,7 +15,8 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.vetcare360.controller.PetController"
-            prefHeight="500.0" prefWidth="700.0">
+            prefHeight="500.0" prefWidth="700.0"
+            stylesheets="@../css/modern-styles.css">
     <top>
         <VBox spacing="10.0">
             <padding>

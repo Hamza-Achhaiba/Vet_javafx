@@ -13,6 +13,7 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.vetcare360.controller.VisitController"
+      stylesheets="@../css/modern-styles.css"
       spacing="20.0" alignment="CENTER" prefWidth="650.0" prefHeight="600.0">
     <padding>
         <Insets top="30.0" right="30.0" bottom="30.0" left="30.0"/>

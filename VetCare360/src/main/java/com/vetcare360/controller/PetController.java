@@ -15,7 +15,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -105,6 +104,7 @@ public class PetController {
     /**
      * Set the pet to display in pet details view.
      */
+    @SuppressWarnings("exports")
     public void setPet(Pet pet) {
         try {
             System.out.println("Setting pet: " + (pet != null ? pet.getName() : "null"));
@@ -145,6 +145,7 @@ public class PetController {
     /**
      * Set the owner for a new pet in the new pet form.
      */
+    @SuppressWarnings("exports")
     public void setOwner(Owner owner) {
         try {
             System.out.println("[DEBUG] setOwner called with: " + (owner != null ? owner.getFullName() : "null"));
@@ -364,7 +365,7 @@ public class PetController {
      * Cancel and close the window.
      */
     @FXML
-    public void cancelButton(ActionEvent event) {
+    public void cancelButton(@SuppressWarnings("exports") ActionEvent event) {
         closeWindow();
     }
 

@@ -14,7 +14,8 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:id="rootVBox"
       fx:controller="com.vetcare360.controller.OwnerSearchController"
-      spacing="10.0" alignment="TOP_CENTER" prefWidth="900.0" prefHeight="600.0">
+      spacing="10.0" alignment="TOP_CENTER" prefWidth="900.0" prefHeight="600.0"
+      stylesheets="@../css/modern-styles.css">
     
     <Label text="Find Owners" styleClass="header-label"/>
     
